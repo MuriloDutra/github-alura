@@ -1,0 +1,163 @@
+GitHub é uma plataforma para facilitar o gerenciamento de projetos em equipe. Ele permite ter controle de versões, 
+compartilhar projetos, fazer alterações simultâneas e saber quem as fez e quando. É uma ferramenta muito utilizada no mercado.
+
+ANTES DE COMEÇAR A LER OS COMANDO, BAIXE O GIT EM SEU COMPUTADOR.
+
+    ============================== COMANDOS SIMPLES =======================
+
+-   Para baixar uma cópia de um projeto é necessário copiar a sua URL, acessando a página do projeto pelo gitHub browser/navegador,
+    então acesse pelo terminal a pasta em que deseja colocar os arquivos e execute este COMANDO: git clone URL.
+    EXEMPLO: git clone https://github.com/MuriloDutra/tagchatter-Murilo-Dutra-Alves.git
+
+-   Para ver todas as versões do projeto, basta acessar a pasta pelo terminal e executar o seguinte COMANDO: git tag.
+
+-   Para ver a diferença entre versões do projeto, execute: git diff v0.1 v0.2. 
+    O número da versão é de acordo com seu projeto, no meu caso tenho duas versões, respectivamente v0.1 e v0.2
+
+-   Para tornar uma pasta do seu computador um repositório do git, entre nela pelo terminal e execute: git init. 
+    Fazendo isso o git passa controlar esta pasta, verificando quando há alterações nela. 
+
+-   Caso queira ver quais os arquivos que o git está controlando/monitorando, execute: git ls-files. 
+
+-   O COMANDO, git status, mostra o estado atual do repositório
+
+-   Para adicionar arquivos no seu repositório  git, use o COMANDO: git add NomeDoArquivo.TipoDoArquivo
+    Também pode usar o COMANDO: git add *, que irá adicionar todos os arquivos presentes na pasta ao seu repositório.
+    EXEMPLOS:   git add index.html ou
+                git add *
+
+-   Commit é gravar/atualizar alterações no repositório, é como se você estivesse salvando um arquivo, por exemplo.
+    COMANDO do commit: git commit -m 'AQUI VOCÊ PODE DESCREVER OU APENAS DAR UM TÍTULO PARA MUDANÇA QUE ACABOU DE FAZER'
+    EXEMPLO: git commit -m "Meu primeiro commit"
+
+-   Há outra forma de fazer um commit em que TODOS os arquivos serão incluídos, não apenas um. Execute: git commit -a -m "MENSAGEM"
+    EXEMPLO: git commit -a -m 'Comitando todos os arquivos'
+
+-   O COMANDO, git log, mostra os commits feitos no projeto, o histórico por assim dizer.
+    Além de mostrar os commits, também mostra quem foi o autor do commit, a mensagem descritiva e a data.
+
+-   O COMANDO, git whatchanged, além de mostrar as mesma informações que o COMANDO git log, também informa
+    quais foram os arquivos que sofreram alterações, quais foram adicionados ou excluídos.
+
+-   Se a flag "-p" for adicionada ao final do COMANDO "git whatchanged", além de mostrar as mesmas informações padrões, 
+    será possível ver o que mudou nos arquivos, o seu conteúdo.
+    EXEMPLO: git whatchanged -p
+
+-   Execute o COMANDO "git remote" para ver os repositórios remotos que seu repositório local está conectado.
+
+-   Para adicionar um repositório remoto ao seu repositório local, execute: git remote add origin URL.
+    "Origin" é o nome do repositório remoto.
+    Esta URL é a do repositório remoto, que é necessário criar no gitHub pelo browser/navegador.
+    EXEMPLO: git remote add origin https://github.com/MuriloDutra/curso-git.git
+
+-   Para mandar arquivos para o repositório remoto, utilize o COMANDO: git push origin master.
+    Origin é o nome do repositório, obviamente. 
+    Master é o "braço/galho" que você está no momento, no caso é a master(mestre).
+    E push(empurra) é o que envia os arquivos para o reposititório remoto.
+
+    ============================== COMANDOS DE BRANCH =======================
+
+-   O COMANDO "git branch" mostra as branchs do repositório LOCAL. A branch que estiver com um "*" na frente, é a branch atual.
+    Caso queira ver quais branchs o repositório REMOTO possui, execute: git branch -r.
+    Outra forma de fazer é "git branch -a", este COMANDO mostra as branchs LOCAIS e REMOTAS, tudo no mesmo COMANDO.
+
+-   Para criar uma nova branch em seu projeto, execute o COMANDO: git branch NomeDaNovaBranch
+    EXEMPLO: git branch design
+
+-   Para trocar de uma branch para outra, execute o COMANDO: "git checkout NomeDaBranch"
+    EXEMPLO: git checkout design. 
+    Depois execute "git branch" e verá o "*" na frente da branch que você passou como parâmetro.
+
+-   Se quiser criar e já mudar para a branch nova, basta dar o COMANDO "git checkout -b design", que indica que você quer mudar para a branch design, 
+    mas ao mesmo tempo criá-la com a opção "-b" que representa nova branch.
+
+-   Na hora de atualizar o seu repositório remoto com sua nova BRANCH, execute o COMANDO de push normalmente.
+    EXEMPLO: git push origin design
+
+    Mas depois de fazer isso, execute: "git push -u origin design". Isso fará com que sua nova branch local, 
+    fique conectada com a nova branch remota.
+
+    ============================== COMANDOS DE BRANCH E PULL =======================
+-   Caso o seu repositório local esteja desatualizado em relação ao repositório remoto, execute o comando: "git pull" ou "git pull origin master"
+
+-   Vamos supor que haja várias pessoas trabalhando em um mesmo projeto. O usuário A criou uma nova branch com novos arquivos ou novas alterações, 
+    e o usuário B ainda não possui essa nova branch. Para o usuário B ter acesso a ela, basta executar o COMANDO: "git pull", 
+    que todos os arquivos serão puxados/copiados para sua máquina.
+    Mesmo que ele execute este COMANDO, seu repositório LOCAL não possui esta nova branch, então basta criá-la, mas com uma pequena alteração no COMANDO.
+    Na hora de criar a nova branch localmente, execute: "git branch -t NomeDaNovaBranch origin/design".
+    A parte do COMANDO "origin/design" é a referência para o reposititório local.
+
+-   Depois que uma nova funcionalidade de uma branch foi testada e terminada, esta parte do código é implementada para branch MASTER.
+    Depois do código da MASTER estar atualizada, já pode excluir a branch, pois seu código já foi submetido ao projeto.
+    Para deletar uma branch, primeiro dê um "git checkout nomeDaBranch" e em seguida execute: "git branch -d".
+
+-   "git fetch origin" este comando verifica todas as atualizações que foram realizadas no repositório de atalho origin.
+
+-   Para juntar as alterações feitas em uma branch com a master, execute o COMANDO: "git merge NomeDaBranch". 
+    OBS: execute esse comando quando a branch atual for a master.
+    EXEMPLO: git merge design
+
+-   Caso uma branch esteja desatualizada em relação a outra, por exemplo, a master e você queira atualizá-la, 
+    execute: "git rebase NomeDaBranchReferencia NomeDaBranchDesatualizada".
+    O COMANDO "rebase" serve para isso, para atualizar uma branch tendo outra como referência. 
+    O primeiro argumento é a branch que será referência e o segundo argumento é a branch que será atualizada com base na primeira.
+    EXEMPLO: "git rebase master design"
+
+-   Há chances de um rebase ser interrompido no meio por causa de algum conflito, então basta resolver o conflito.
+    Depois de todos os conflitos serem consertados, execute: "git rebase --continue".
+    Este comando faz com que o rebase que havia sido interrompido, continue normalmente.
+    
+    ============================== CONFLITOS =======================
+
+-   O Git utiliza os caracteres >, < e =. Entre o < e o = fica o conteúdo antigo e entre o > e = fica o conteúdo novo.
+
+    ============================== RETOMANDO ARQUIVO PARA UM ESTADO ANTERIOR =======================
+
+-   Supondo que você tenha feito várias alterações em um arquivo, mas se arrependeu e gostaria de voltar o arquivo para seu estado anterior.
+    Execute o COMANDO: git checkout NomeDoArquivo.
+    Com isso seu arquivo voltará para o estado em que estava no último commit.
+    EXEMPLO: git checkout estilo.css
+    OBS: este comando só funciona caso você ainda NÃO tenha executado "git add NomeDoArquivo". 
+    Caso já tenha adicionado o arquivo, execute "git reset HEAD NomeDoArquivo" e em seguida o comando "git checkout NomeDoArquivo".
+
+-   Se por acaso você tiver uma branch com mesmo nome de um arquivo, execute o comando de cima da seguinte maneira: "git checkout -- NomeDoArquivo".
+    O dois hífens seguido de espaço faz com que o git entenda que o próximo parâmetro será um arquivo.
+
+-   Caso as alterações já tenham sido commitadas, mas se arrependeu novamente e queira excluir o commit, execute o COMANDO: "git log",
+    e copie o identificador do commit que deseja voltar o seu projeto. Então execute: git reset IdentificadorDoCommit.
+    O histórico de commits de seu projeto voltará para o estado do commit que você passou o identificador.
+    EXEMPLO: "git reset e632cf90d5ebfabfe062d652da94f6e5d355014e"
+    OBS: este comando apaga apenas o commit, a alteração no arquivo se mantém, para apaga-lá, leia o tópico de cima.
+
+-   Caso necessite apagar apagar as alterações de um commit antigo, mas sem deletar as alterações mais recentes, execute "git log"
+    e pegue o identificador do commit que deseja apagar as alterações.
+    COMANDO: git revert e632cf90d5ebfabfe062d652da94f6e5d355014e. O commit se manterá no histórico de commits, mas suas alterações serão desfeitas nos arquivos.
+    Além disso um novo commit será criado no histórico, informando o que ocorreu.
+
+-   "git reset --soft". Com este comando, as alterações são removidas do histórico local de commits, mas não são removidas do index.
+
+-   "git reset --hard". Com este comando, as alterações são removidas do histórico local de commits 
+    e também tanto do index quanto do working directory, permanentemente.
+
+-   Ao utilizar o git reset, ao digitarmos HEAD~ seguido de um número inteiro n, será feita uma referência ao n-ésimo commit anterior ao HEAD.
+    Por exemplo, HEAD~1, faz referência ao penúltimo commit e HEAD~2, ao antepenúltimo.
+    No caso específico do penúltimo commit, também pode-se referenciá-lo utilizando o atalho HEAD^.
+
+    ============================== COMANDOS STASH =======================
+-   Para guardar uma alteração em um local temporário, de forma a não afetar o projeto, execute: "git stash".
+
+-   Para ver quantas informações/alterações tem dentro de um stash, execute: "git stash list".
+
+-   Para pegar a alteração que havia sido guardada no stash de forma temporária, execute: "git stash pop".
+    Este comando retorna a última alteração que estava na lista do stash e a deleta também. Para ser específico e informar qual alteração deseja recuperar,
+    execute: "git stash apply stash@{0}", stash@{0} é a alteração que deseja recuperar, este comando não exclui o stash da pilha.
+
+-   Mesmo executando o comando de cima, a alteração permanece na lista do stash, para apagar, execute: "git stash drop".
+
+-   Por fim, se quisermos excluir todos os estados, podemos utilizar o comando git stash clear.
+
+    ============================== OUTROS COMANDOS =======================
+-   Caso queira adicionar APENAS UM COMMIT a sua branch master, execute: git cherry-pick CódigoDoCommit.
+    Você pode pensar que este comando não é muito útil, mas imagine que você está desenvolvendo em uma branch parela a master,
+    e alguém precisa de um certa modificação que você fez, mas você ainda não a finalizou. Então basta pegar o código do commit com a alteração que o colega deseja,
+    e adicioná-lo a master para ele ter acesso a essa alteração.
